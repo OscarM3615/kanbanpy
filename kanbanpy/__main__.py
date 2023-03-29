@@ -10,9 +10,13 @@ from .actions import clear, create, default, next_, prev, remove, setup
 
 handlers = {
     'create': create.handler,
+    'c': create.handler,
     'next': next_.handler,
+    'n': next_.handler,
     'prev': prev.handler,
+    'p': prev.handler,
     'remove': remove.handler,
+    'r': remove.handler,
     'clear': clear.handler,
     'setup': setup.handler
 }
