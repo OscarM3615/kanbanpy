@@ -27,3 +27,8 @@ remove_parser.add_argument('id', type=int, help='task id')
 
 clear_parser = subparsers.add_parser(
     'clear', help='remove all completed tasks', description='Remove all completed tasks')
+
+setup_parser = subparsers.add_parser(
+    'setup', help='create the configuration file', description='Create the configuration file')
+setup_parser.add_argument('-y', dest='default',
+                          action='store_true', help='use defaults')

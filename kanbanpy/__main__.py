@@ -4,8 +4,8 @@ A console-based Kanban task manager created in Python.
 This module parses the command line arguments and call the respective handler.
 """
 
-from .cli import parser as default_parser
-from .actions import clear, create, next_, prev, remove
+from .cli import parser
+from .actions import clear, create, default, next_, prev, remove, setup
 
 
 handlers = {
@@ -13,20 +13,18 @@ handlers = {
     'next': next_.handler,
     'prev': prev.handler,
     'remove': remove.handler,
-    'clear': clear.handler
+    'clear': clear.handler,
+    'setup': setup.handler
 }
 
 
-def default_help(*args):
-    """Print the global CLI help."""
-    default_parser.print_help()
-
 def main():
-    """Parse console arguments and call the required parser."""
-    args = default_parser.parse_args()
+    """Parse console arguments and call the required parser. The help argument is handled automatically."""
 
-    handler = handlers.get(args.command, default_help)
+    args = parser.parse_args()
+    handler = handlers.get(args.command, default.handler)
     handler(args)
+
 
 if __name__ == '__main__':
     main()
