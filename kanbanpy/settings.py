@@ -4,14 +4,14 @@ This module defines the static app settings, such as the app defaults or config 
 
 import os
 import json
-from typing import Dict, List
+from typing import Any, Dict, List, Optional
 from platformdirs import user_config_path
 from .models import Task
 
 
 config_file = os.path.join(os.path.expanduser('~'), '.kanbanpy.json')
 
-default_config = {
+default_config: Dict[str, Any] = {
     # ~/.config/kanbanpy/kanbanpy.json
     'storage': str(user_config_path().joinpath('kanbanpy').joinpath('kanbanpy.json')),
     'wip_limit': 5
@@ -26,9 +26,12 @@ def load_config():
     return config
 
 
-def create_config():
+def create_config(config: Optional[Dict[str, Any]] = None):
     with open(config_file, 'w') as conf:
-        json.dump(default_config, conf)
+        if config:
+            json.dump(config, conf)
+        else:
+            json.dump(default_config, conf)
 
 
 def seed_data(path: str):

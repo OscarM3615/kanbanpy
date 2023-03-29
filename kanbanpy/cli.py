@@ -30,5 +30,5 @@ clear_parser = subparsers.add_parser(
 
 setup_parser = subparsers.add_parser(
     'setup', help='create the configuration file', description='Create the configuration file')
-setup_parser.add_argument('-y', dest='default',
+setup_parser.add_argument('-y', dest='defaults',
                           action='store_true', help='use defaults')
