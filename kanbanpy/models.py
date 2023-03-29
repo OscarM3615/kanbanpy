@@ -11,3 +11,6 @@ class Task:
 
     def __repr__(self) -> str:
         return f'Task(id={self.id!r}, title={self.title!r}, status={self.status!r})'
+
+    def json(self):
+        return {'id': self.id, 'title': self.title, 'status': self.status}

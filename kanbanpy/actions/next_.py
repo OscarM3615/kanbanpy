@@ -11,4 +11,4 @@ def handler(args: Namespace):
     except ValueError:
         board.show(f'[bright_red]Unable to find task with id {args.id}.[/]')
     except IndexError:
-        board.show('f[bright_red]Task is already in the last status.[/]')
+        board.show('[bright_red]Task is already in the last status.[/]')

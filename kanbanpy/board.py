@@ -4,7 +4,7 @@ from typing import Optional
 from itertools import zip_longest
 from rich.table import Table, Column
 from rich.box import DOUBLE
-from .settings import load_config
+from .settings import load_config, statuses
 from .console import console
 from .models import Task
 
@@ -12,35 +12,68 @@ from .models import Task
 class Board:
     def __init__(self):
         try:
-            config = load_config()
+            self.config = load_config()
         except FileNotFoundError:
             console.print(
                 '[red]\[*][/] The config file does not exist, run "kanbanpy setup" to create it.')
             exit()
 
         try:
-            with open(config['storage']) as storage:
+            with open(self.config['storage']) as storage:
                 tasks_json = json.load(storage)
         except FileNotFoundError:
             console.print(
-                f'[red]\[*][/] It seems the storage file does not exist.')
+                f'[bright_red]\[*][/] It seems the storage file does not exist.')
             console.print(
-                f'[red]\[*][/] Please check that "{config["storage"]}" contains a valid JSON array.')
+                f'[bright_red]\[*][/] Please check that "{self.config["storage"]}" contains a valid JSON array.')
             exit()
 
         self.tasks = [Task(**t) for t in tasks_json]
 
+    def _save_json(self):
+        with open(self.config['storage'], 'w') as data:
+            json.dump([t.json() for t in self.tasks], data)
+
     def add_task(self, task: Task):
-        ...
+        next_id = 1
+        if len(self.tasks):
+            next_id += self.tasks[-1].id
+
+        task.id = next_id
+        self.tasks.append(task)
+
+        self._save_json()
+
 
     def move_task(self, task_id: int, *, reverse: bool = False):
-        ...
+        try:
+            task = [t for t in self.tasks if t.id == task_id][0]
+        except IndexError:
+            raise ValueError(f'task with id {task_id} not found')
+
+        if not reverse:
+            if task.status == 'done':
+                raise IndexError('task is already in last status')
+            task.status = statuses[statuses.index(task.status) + 1]
+        else:
+            if task.status == 'to do':
+                raise IndexError('task is already in first status')
+            task.status = statuses[statuses.index(task.status) - 1]
+
+        self._save_json()
 
     def delete_task(self, task_id: int):
-        ...
+        new_tasks = [t for t in self.tasks if t.id != task_id]
+
+        if len(new_tasks) == len(self.tasks):
+            raise ValueError(f'task with id {task_id} not found')
+
+        self.tasks = new_tasks
+        self._save_json()
 
     def clear_done(self):
-        ...
+        self.tasks = [t for t in self.tasks if t.status != 'done']
+        self._save_json()
 
     def show(self, message: Optional[str] = '[bright_white]Tip: run "kanbanpy -h" to show more commands.[/]'):
         cols = [

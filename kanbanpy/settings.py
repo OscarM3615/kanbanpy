@@ -19,6 +19,8 @@ default_config: Dict[str, Any] = {
 
 default_data: List[Task] = []
 
+statuses = ('to do', 'in progress', 'done')
+
 
 def load_config():
     with open(config_file) as conf:
