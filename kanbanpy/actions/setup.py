@@ -14,6 +14,8 @@ def handler(args: Namespace):
 
     if args.defaults:
         create_config()
+
+        # Create storage path and write the default data.
         Path(default_config['storage']).parent.mkdir(parents=True, exist_ok=True)
         seed_data(default_config['storage'])
 
@@ -28,6 +30,8 @@ def handler(args: Namespace):
         f'Enter WIP limit (default: "{default_config["wip_limit"]}"): ') or default_config['wip_limit'])
 
     create_config(config)
+
+    # Create storage path and write user-provided data.
     Path(config['storage']).parent.mkdir(parents=True, exist_ok=True)
     seed_data(config['storage'])
 

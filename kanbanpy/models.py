@@ -1,6 +1,12 @@
+"""
+This module contains the classes used to hold the program data.
+"""
+
 import json
 
 class Task:
+    """A json serialisable container for the actual task."""
+
     def __init__(self, id: int, title: str, status: str):
         self.id = id
         self.title = title
