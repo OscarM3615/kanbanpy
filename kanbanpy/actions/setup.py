@@ -1,12 +1,16 @@
 from typing import Any, Dict
 from argparse import Namespace
 from pathlib import Path
-from ..settings import default_config, create_config, seed_data
+from ..settings import config_file, default_config, create_config, seed_data
 from ..console import console
 
 
 def handler(args: Namespace):
     """Handle creating the config file and data storage."""
+
+    if Path(config_file).exists():
+        console.print('[bright_red]\[*][/] Config file already exists.')
+        return
 
     if args.defaults:
         create_config()
