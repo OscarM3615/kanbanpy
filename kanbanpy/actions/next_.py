@@ -8,7 +8,7 @@ def handler(args: Namespace):
     try:
         board.move_task(args.id)
         board.show(f'[bright_green]Moved task with id {args.id}.[/]')
-    except ValueError:
-        board.show(f'[bright_red]Unable to find task with id {args.id}.[/]')
+    except ValueError as ex:
+        board.show(f'[bright_red]{ex}[/]')
     except IndexError:
         board.show('[bright_red]Task is already in the last status.[/]')

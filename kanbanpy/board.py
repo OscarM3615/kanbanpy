@@ -49,7 +49,7 @@ class Board:
         try:
             task = [t for t in self.tasks if t.id == task_id][0]
         except IndexError:
-            raise ValueError(f'task with id {task_id} not found')
+            raise ValueError(f'Unable to find task with id {task_id}.')
 
         if not reverse:
             if task.status == 'done':
@@ -59,6 +59,11 @@ class Board:
             if task.status == 'to do':
                 raise IndexError('task is already in first status')
             task.status = statuses[statuses.index(task.status) - 1]
+
+        wip = [t for t in self.tasks if t.status == 'in progress']
+        if len(wip) > self.config['wip_limit']:
+            task.status = 'to do' if not reverse else 'done'
+            raise ValueError(f'Can not exceed the WIP limit ({self.config["wip_limit"]}).')
 
         self._save_json()
 
