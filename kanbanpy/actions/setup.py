@@ -14,7 +14,7 @@ def handler(args: Namespace):
         seed_data(default_config['storage'])
 
         console.print(
-            '[bright_green]\[+] Created config file using defaults.[/]')
+            '[bright_green]\[+][/] Created config file using defaults.')
         return
 
     config: Dict[str, Any] = {}
@@ -27,4 +27,4 @@ def handler(args: Namespace):
     Path(config['storage']).parent.mkdir(parents=True, exist_ok=True)
     seed_data(config['storage'])
 
-    console.print('[bright_green]\[+] Created config file successfully.[/]')
+    console.print('[bright_green]\[+][/] Created config file successfully.')
