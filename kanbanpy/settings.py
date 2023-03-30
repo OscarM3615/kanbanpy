@@ -9,12 +9,14 @@ from platformdirs import user_config_path
 from .models import Task
 
 
-config_file = os.path.join(os.path.expanduser('~'), '.kanbanpy.json')
+config_file = os.environ.get('KANBANPY_CONFIG', os.path.join(
+    os.path.expanduser('~'), '.kanbanpy.json'))
 
 default_config: Dict[str, Any] = {
     # ~/.config/kanbanpy/kanbanpy.json
     'storage': str(user_config_path().joinpath('kanbanpy').joinpath('kanbanpy.json')),
-    'wip_limit': 5
+    'wip_limit': 5,
+    'clear_screen': False
 }
 
 default_data: List[Task] = []

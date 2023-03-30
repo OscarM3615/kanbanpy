@@ -99,5 +99,8 @@ class Board:
         if message:
             table.caption = message
 
+        if self.config['clear_screen']:
+            os.system('cls' if os.name == 'nt' else 'clear')
+
         console.print(table)
         print()
