@@ -35,12 +35,12 @@ def create_config(config: Optional[Dict[str, Any]] = None):
     """Create a config file with the function arguments or the default config."""
     with open(config_file, 'w') as conf:
         if config:
-            json.dump(config, conf)
+            json.dump(config, conf, indent=2)
         else:
-            json.dump(default_config, conf)
+            json.dump(default_config, conf, indent=2)
 
 
 def seed_data(path: str):
     """Create a data file in path with an empty list of tasks."""
     with open(path, 'w') as dat:
-        json.dump(default_data, dat)
+        json.dump(default_data, dat, indent=2)

@@ -32,7 +32,7 @@ class Board:
 
     def _save_json(self):
         with open(self.config['storage'], 'w') as data:
-            json.dump([t.json() for t in self.tasks], data)
+            json.dump([t.json() for t in self.tasks], data, indent=2)
 
     def add_task(self, task: Task):
         next_id = 1
