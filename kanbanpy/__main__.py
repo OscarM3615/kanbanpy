@@ -5,7 +5,7 @@ This module parses the command line arguments and call the respective handler.
 """
 
 from .cli import parser
-from .actions import clear, create, default, next_, prev, remove, setup
+from .actions import backup, clear, create, default, next_, prev, remove, setup
 
 
 handlers = {
@@ -18,7 +18,8 @@ handlers = {
     'remove': remove.handler,
     'r': remove.handler,
     'clear': clear.handler,
-    'setup': setup.handler
+    'setup': setup.handler,
+    'backup': backup.handler
 }
 
 

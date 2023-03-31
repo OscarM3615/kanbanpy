@@ -32,3 +32,8 @@ setup_parser = subparsers.add_parser(
     'setup', help='create the configuration file', description='Create the configuration file')
 setup_parser.add_argument('-y', dest='defaults',
                           action='store_true', help='use defaults')
+
+backup_parser = subparsers.add_parser(
+    'backup', help='create a backup file', description='Create a backup file')
+backup_parser.add_argument(
+    '-o', dest='output', type=str, help='destination file')
