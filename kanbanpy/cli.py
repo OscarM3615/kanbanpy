@@ -10,7 +10,8 @@ parser = ArgumentParser(
 subparsers = parser.add_subparsers(dest='command')
 
 create_parser = subparsers.add_parser(
-    'create', help='create a new task', description='Create a new task', aliases=['c'])
+    'create', help='create a new task', description='Create a new task',
+    aliases=['c'], epilog='Include a "!" in the name to mark the task as important.')
 create_parser.add_argument('title', type=str, help='task title')
 
 next_parser = subparsers.add_parser(

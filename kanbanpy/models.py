@@ -13,7 +13,9 @@ class Task:
         self.status = status
 
     def __str__(self) -> str:
-        return f'[{self.id}] {self.title}'
+        if '!' in self.title:
+            return f'[yellow]\[{self.id}] {self.title}[/]'
+        return f'\[{self.id}] {self.title}'
 
     def __repr__(self) -> str:
         return f'Task(id={self.id!r}, title={self.title!r}, status={self.status!r})'
