@@ -7,6 +7,8 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser(
     prog='kanbanpy', description='Console-based kanban task manager')
+parser.add_argument('-v', '--version', action='store_true', help='display program version')
+
 subparsers = parser.add_subparsers(dest='command')
 
 create_parser = subparsers.add_parser(

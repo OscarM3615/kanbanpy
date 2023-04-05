@@ -9,6 +9,8 @@ from platformdirs import user_config_path
 from .models import Task
 
 
+app_version = '1.2.0'
+
 config_file = os.environ.get('KANBANPY_CONFIG', os.path.join(
     os.path.expanduser('~'), '.kanbanpy.json'))
 
