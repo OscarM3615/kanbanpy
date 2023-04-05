@@ -80,6 +80,37 @@ To explore the full list of commands, run:
 kanbanpy --help
 ```
 
+### Tips
+
+#### Aliases
+
+A handful technique is to define a shell alias to call the cli and take
+advantage of the command aliases defined by the package.
+
+```sh
+# Instead of running:
+kanbanpy create "my new todo"
+
+# Define an alias in your .bashrc or .zshrc:
+alias kb="kanbanpy"
+
+# And type shorter commands:
+kb c "my new todo"
+```
+
+#### Important tasks
+
+Include a '!' in a task todo to mark it as important. The task will be
+highlighted when displaying the board:
+
+```sh
+kanbanpy create "an important todo!"
+
+kanbanpy create "project!: todo title"
+
+kanbanpy create "(!) new todo"
+```
+
 ## Contributing
 
 Thank you for considering contributing to my project! Any pull requests are
