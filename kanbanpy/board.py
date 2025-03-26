@@ -15,7 +15,7 @@ class Board:
             self.config = load_config()
         except FileNotFoundError:
             console.print(
-                '[red]\[*][/] The config file does not exist, run "kanbanpy setup" to create it.')
+                r'[red]\[*][/] The config file does not exist, run "kanbanpy setup" to create it.')
             exit()
 
         try:
@@ -23,9 +23,9 @@ class Board:
                 tasks_json = json.load(storage)
         except FileNotFoundError:
             console.print(
-                f'[bright_red]\[*][/] It seems the storage file does not exist.')
+                rf'[bright_red]\[*][/] It seems the storage file does not exist.')
             console.print(
-                f'[bright_red]\[*][/] Please check that "{self.config["storage"]}" contains a valid JSON array.')
+                rf'[bright_red]\[*][/] Please check that "{self.config["storage"]}" contains a valid JSON array.')
             exit()
 
         self.tasks = [Task(**t) for t in tasks_json]

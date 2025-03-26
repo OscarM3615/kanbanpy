@@ -1,0 +1,39 @@
+[project]
+name = "kanbanpy"
+version = "2.0.0"
+description = "A console-based Kanban task manager created in Python."
+authors = [
+    { name = "Óscar Miranda", email = "oscarmiranda3615@gmail.com" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["kanban", "project", "management"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "rich (>=13.9.4,<14.0.0)",
+    "platformdirs (>=4.3.7,<5.0.0)"
+]
+
+
+[project.urls]
+homepage = "https://github.com/OscarM3615/kanbanpy"
+repository = "https://github.com/OscarM3615/kanbanpy"
+
+
+[project.scripts]
+kanbanpy = "kanbanpy.__main__:main"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
