@@ -19,18 +19,9 @@ Install using pip running the following command in the terminal:
 pip install kanbanpy
 ```
 
-## Configuration
+## Data storage
 
-kanbanpy requires a config file located in the user's home directory. This file
-can be generated using the `setup` command:
-
-```sh
-# Run the setup wizard
-kanbanpy setup
-
-# Or use the defaults
-kanbanpy setup -y
-```
+kanbanpy uses a data file located at the user data dir following XDG basedir convention. This behaviour can be overriden by setting the `KANBANPY_DEBUG` environment variable to anything. When the environment variable is defined the data file is generated in the working directory instead.
 
 ## Usage
 

@@ -24,16 +24,16 @@ dependencies = [
     "platformdirs (>=4.3.7,<5.0.0)"
 ]
 
-
 [project.urls]
 homepage = "https://github.com/OscarM3615/kanbanpy"
 repository = "https://github.com/OscarM3615/kanbanpy"
 
-
 [project.scripts]
 kanbanpy = "kanbanpy.__main__:main"
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.5"
