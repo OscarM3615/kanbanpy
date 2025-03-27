@@ -28,6 +28,12 @@ class Task:
     """
 
     def __init__(self, title: str, status: Status = Status.TO_DO, id: Optional[int] = None):
+        """Initialise a task.
+
+        :param title: task title
+        :param status: task status, defaults to Status.TO_DO
+        :param id: explicitly set id, defaults to None
+        """
         self.id = id or 0  # if 0 it will be overriden when adding to a board
         self.title = title
         self.status = status
@@ -79,6 +85,10 @@ class Board:
     """
 
     def __init__(self, tasks: list[Task]):
+        """Initialise the board.
+
+        :param tasks: list of tasks to add
+        """
         self._tasks = tasks
 
     def __repr__(self) -> str:
