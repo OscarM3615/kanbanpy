@@ -19,10 +19,6 @@ Install using pip running the following command in the terminal:
 pip install kanbanpy
 ```
 
-## Data storage
-
-kanbanpy uses a data file located at the user data dir following XDG basedir convention. This behaviour can be overriden by setting the `KANBANPY_DEBUG` environment variable to anything. When the environment variable is defined the data file is generated in the working directory instead.
-
 ## Usage
 
 If you installed the library, you can use the CLI as a system command:
