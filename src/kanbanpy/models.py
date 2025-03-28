@@ -4,7 +4,7 @@ its behaviour.
 
 
 from collections import defaultdict
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from enum import IntEnum
 from typing import Literal, Optional
 
@@ -76,7 +76,12 @@ class Task:
         :raises ValueError: if trying to move the task outside the status bounds
         """
         move_to = 1 if direction == 'right' else -1
-        self.status = Status(self.status + move_to)
+
+        try:
+            self.status = Status(self.status + move_to)
+        except ValueError:
+            # this changes the message to be shown
+            raise ValueError('Unable to move the task')
 
 
 class Board:
@@ -152,12 +157,19 @@ class Board:
 
         return table
 
+    def to_json(self) -> Iterable:
+        """Generate the JSON representation of the board.
+
+        :return: JSON list
+        """
+        return [t.to_json() for t in self._tasks]
+
     def add(self, task: Task):
         """Add a task to the board.
 
         :param task: task object
         """
-        new_id = self._tasks[-1].id if len(self._tasks) else 1
+        new_id = self._tasks[-1].id + 1 if len(self._tasks) else 1
         task.id = new_id
 
         self._tasks.append(task)
@@ -170,7 +182,7 @@ class Board:
         """
         task = next((t for t in self._tasks if t.id == task_id), None)
         if not task:
-            raise ValueError('task id is not found in the board')
+            raise ValueError('The task was not found')
 
         self._tasks.remove(task)
 
@@ -188,6 +200,6 @@ class Board:
         """
         task = next((t for t in self._tasks if t.id == task_id), None)
         if not task:
-            raise ValueError('task id is not found in the board')
+            raise ValueError('The task was not found')
 
         task.move_to(direction)

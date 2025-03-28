@@ -77,6 +77,16 @@ class TestTask:
 
 
 class TestBoard:
+    def test_json_structure(self, board: Board, task: Task):
+        """Test that the JSON structure contains all important fields.
+        """
+        board.add(task)
+        json_obj = board.to_json()
+
+        assert isinstance(json_obj, list)
+        assert isinstance(json_obj[0], dict)
+        assert json_obj[0]['title'] == task.title
+
     def test_add_task(self, board: Board, task: Task):
         """Test that the task is added to the board.
         """
