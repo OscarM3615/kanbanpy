@@ -1,0 +1,31 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run tests with pytest
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: poetry
+
+      - name: setup poetry
+        run: pip install poetry
+
+      - name: install dependencies
+        run: poetry install
+
+      - name: run pytest
+        run: poetry run pytest
