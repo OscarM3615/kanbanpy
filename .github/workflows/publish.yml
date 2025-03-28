@@ -1,0 +1,31 @@
+name: Publish package to PyPI
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build-and-publish:
+    name: Build and publish package
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: poetry
+
+      - name: setup poetry
+        run: pip install poetry
+
+      - name: build package
+        run: poetry build
+
+      - name: publish package to pypi
+        run: poetry publish --username __token__ --password $POETRY_PYPI_TOKEN
+        env:
+          POETRY_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
