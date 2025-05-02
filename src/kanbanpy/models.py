@@ -69,13 +69,14 @@ class Task:
         """
         return {'id': self.id, 'title': self.title, 'status': self.status}
 
-    def move_to(self, direction: Literal['right', 'left']):
+    def move_to(self, direction: Literal['right', 'left'], steps: int):
         """Update the task status.
 
         :param direction: direction in the board to move the task
+        :param steps: amount of steps to move
         :raises ValueError: if trying to move the task outside the status bounds
         """
-        move_to = 1 if direction == 'right' else -1
+        move_to = steps if direction == 'right' else steps * -1
 
         try:
             self.status = Status(self.status + move_to)
@@ -191,15 +192,17 @@ class Board:
         """
         self._tasks = [t for t in self._tasks if t.status != Status.DONE]
 
-    def move(self, task_id: int, direction: Literal['left', 'right']):
+    def move(self, task_id: int, direction: Literal['left', 'right'],
+             steps: int):
         """Update a task's status by providing a direction.
 
         :param task_id: task id
-        :param direction: direction to move in the board.
+        :param direction: direction to move in the board
+        :param steps: amount of steps to move
         :raises ValueError: if the task id is not found
         """
         task = next((t for t in self._tasks if t.id == task_id), None)
         if not task:
             raise ValueError('The task was not found')
 
-        task.move_to(direction)
+        task.move_to(direction, steps)

@@ -8,14 +8,17 @@ from kanbanpy.models import Board, Status, Task
 @pytest.fixture
 def task():
     """Generate a default state task.
-:return: task
+
+    :return: task object
     """
     return Task('my new todo', Status.TO_DO)
 
 
 @pytest.fixture
 def make_task():
-    """Generate a task with specific.
+    """Generate a task with specific status.
+
+    :return: task object
     """
     def _make_task(status: Status):
         return Task('my new todo', status)
@@ -27,7 +30,7 @@ def make_task():
 def board():
     """Generate an empty board.
 
-    :return: board
+    :return: board object
     """
     return Board([])
 
@@ -63,17 +66,17 @@ class TestTask:
     def test_move_valid(self, task: Task):
         """Test that moving the task updates the status.
         """
-        task.move_to('right')
-        assert task.status == Status.IN_PROGRESS
+        task.move_to('right', 2)
+        assert task.status == Status.REVIEW
 
-        task.move_to('left')
-        assert task.status == Status.TO_DO
+        task.move_to('left', 1)
+        assert task.status == Status.IN_PROGRESS
 
     def test_move_invalid(self, task: Task):
         """Test that trying to move to an non existing status raises an error.
         """
         with pytest.raises(ValueError):
-            task.move_to('left')
+            task.move_to('left', 1)
 
 
 class TestBoard:
@@ -107,7 +110,7 @@ class TestBoard:
         """
         task = make_task(Status.IN_PROGRESS)
         board.add(task)
-        board.move(task.id, 'right')
+        board.move(task.id, 'right', 1)
 
         assert task.status == Status.REVIEW
 

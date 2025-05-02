@@ -29,6 +29,13 @@ next_parser = subparsers.add_parser(
     aliases=('n',)
 )
 next_parser.add_argument('id', type=int, help='task id')
+next_parser.add_argument(
+    'steps',
+    type=int,
+    nargs='?',
+    default=1,
+    help='steps to move'
+)
 
 prev_parser = subparsers.add_parser(
     'prev',
@@ -37,6 +44,13 @@ prev_parser = subparsers.add_parser(
     aliases=('p',)
 )
 prev_parser.add_argument('id', type=int, help='task id')
+prev_parser.add_argument(
+    'steps',
+    type=int,
+    nargs='?',
+    default=1,
+    help='steps to move'
+)
 
 remove_parser = subparsers.add_parser(
     'remove',

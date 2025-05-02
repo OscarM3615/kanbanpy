@@ -24,13 +24,13 @@ def main():
         storage.write(board.to_json())
     elif re.match(r'^(n|next)$', command):
         try:
-            board.move(args.id, 'right')
+            board.move(args.id, 'right', args.steps)
             storage.write(board.to_json())
         except ValueError as err:
             print(rf'[red]\[*][/] {err}.')
     elif re.match(r'^(p|prev)$', command):
         try:
-            board.move(args.id, 'left')
+            board.move(args.id, 'left', args.steps)
             storage.write(board.to_json())
         except ValueError as err:
             print(rf'[red]\[*][/] {err}.')
