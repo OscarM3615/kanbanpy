@@ -206,3 +206,16 @@ class Board:
             raise ValueError('The task was not found')
 
         task.move_to(direction, steps)
+
+    def rename(self, task_id: int, title: str):
+        """Update the title of a task.
+
+        :param task_id: task id
+        :param title: new task title
+        :raises ValueError: if the task id is not found
+        """
+        task = next((t for t in self._tasks if t.id == task_id), None)
+        if not task:
+            raise ValueError('The task was not found')
+
+        task.title = title

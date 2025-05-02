@@ -60,6 +60,15 @@ remove_parser = subparsers.add_parser(
 )
 remove_parser.add_argument('id', type=int, help='task id')
 
+rename_parser = subparsers.add_parser(
+    'rename',
+    help='rename a task',
+    description='Rename a task title.',
+    aliases=('m',)
+)
+rename_parser.add_argument('id', type=int, help='task id')
+rename_parser.add_argument('title', type=str, help='new task title')
+
 clear_parser = subparsers.add_parser(
     'clear',
     help='clear done tasks',

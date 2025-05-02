@@ -40,6 +40,11 @@ def main():
             storage.write(board.to_json())
         except ValueError as err:
             print(rf'[red]\[*][/] {err}.')
+    elif re.match(r'^(m|rename)$', command):
+        try:
+            board.rename(args.id, args.title)
+        except ValueError as err:
+            print(rf'[red]\[*][/] {err}.')
     elif command == 'clear':
         board.remove_done()
         storage.write(board.to_json())

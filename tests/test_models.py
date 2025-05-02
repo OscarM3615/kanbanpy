@@ -114,6 +114,14 @@ class TestBoard:
 
         assert task.status == Status.REVIEW
 
+    def test_rename_task(self, task: Task):
+        """Test that the rename method updates the task title.
+        """
+        board = Board([task])
+        board.rename(task.id, 'this is the new task title')
+
+        assert task.title == 'this is the new task title'
+
     def test_clear_done(self, make_task: Callable[[Status], Task]):
         """Test that the board removes all done tasks.
         """
