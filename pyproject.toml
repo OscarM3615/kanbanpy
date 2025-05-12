@@ -1,6 +1,6 @@
 [project]
 name = "kanbanpy"
-version = "2.1.0"
+version = "2.1.1"
 description = "A console-based Kanban task manager created in Python."
 authors = [
     { name = "Óscar Miranda", email = "oscarmiranda3615@gmail.com" },
@@ -20,7 +20,7 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "rich (>=13.9.4,<14.0.0)",
+    "rich (>=14.0.0,<15.0.0)",
     "platformdirs (>=4.3.7,<5.0.0)"
 ]
 
