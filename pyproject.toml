@@ -1,6 +1,6 @@
 [project]
 name = "kanbanpy"
-version = "2.1.1"
+version = "2.2.0"
 description = "A console-based Kanban task manager created in Python."
 authors = [
     { name = "Óscar Miranda", email = "oscarmiranda3615@gmail.com" },

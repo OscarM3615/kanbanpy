@@ -175,17 +175,19 @@ class Board:
 
         self._tasks.append(task)
 
-    def remove(self, task_id: int):
+    def remove(self, *task_ids: int):
         """Remove a task from the board.
 
         :param task_id: task id
         :raises ValueError: if the task id is not found
         """
-        task = next((t for t in self._tasks if t.id == task_id), None)
-        if not task:
-            raise ValueError('The task was not found')
+        stored_ids = [t.id for t in self._tasks]
 
-        self._tasks.remove(task)
+        if not all(task_id in stored_ids for task_id in task_ids):
+            raise ValueError('A task was not found')
+
+        filtered_tasks = [t for t in self._tasks if t.id not in task_ids]
+        self._tasks = filtered_tasks
 
     def remove_done(self):
         """Remove all tasks with done status.

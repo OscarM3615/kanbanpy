@@ -36,7 +36,7 @@ def main():
             print(rf'[red]\[*][/] {err}.')
     elif re.match(r'^(r|remove)$', command):
         try:
-            board.remove(args.id)
+            board.remove(*args.id)
             storage.write(board.to_json())
         except ValueError as err:
             print(rf'[red]\[*][/] {err}.')

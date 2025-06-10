@@ -58,7 +58,7 @@ remove_parser = subparsers.add_parser(
     description='Delete a task from the board',
     aliases=('r',)
 )
-remove_parser.add_argument('id', type=int, help='task id')
+remove_parser.add_argument('id', type=int, nargs='+', help='task id')
 
 rename_parser = subparsers.add_parser(
     'rename',
